@@ -17,20 +17,20 @@ export const Todo: React.FC = () => {
   const [sortKey, setSortKey] = useState<'id' | 'dueDate'>('id');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
 
-  //初回マウント時、localStorageから読み込む
-  useEffect(() => {
-    const stored = localStorage.getItem('todos');
-    if (stored) {
-      setTodos(JSON.parse(stored));
-    }
-  }, []);
+  // //初回マウント時、localStorageから読み込む
+  // useEffect(() => {
+  //   const stored = localStorage.getItem('todos');
+  //   if (stored) {
+  //     setTodos(JSON.parse(stored));
+  //   }
+  // }, []);
 
-  //todos が更新されるたびにlocalStorageへ保存
-  useEffect(() => {
-    console.log('Updated todos state:', todos);
-    localStorage.setItem('todos', JSON.stringify(todos));
-    console.log('LocalStorage after set:', localStorage.getItem('todos'));
-  }, [todos]);
+  // //todos が更新されるたびにlocalStorageへ保存
+  // useEffect(() => {
+  //   console.log('Updated todos state:', todos);
+  //   localStorage.setItem('todos', JSON.stringify(todos));
+  //   console.log('LocalStorage after set:', localStorage.getItem('todos'));
+  // }, [todos]);
 
   //Todoを追加 (既存)
   const handleAddTodo = (title: string, detail: string, dueDate?: string) => {
