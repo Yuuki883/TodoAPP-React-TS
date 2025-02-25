@@ -3,8 +3,11 @@ import { createRoot } from 'react-dom/client';
 import { Todo } from './Todo';
 
 const rootElement = document.getElementById('root');
-const root = createRoot(rootElement);
+if (!rootElement) {
+  throw new Error("Root element not found");
+}
 
+const root = createRoot(rootElement);
 root.render(
   <StrictMode>
     <Todo />
