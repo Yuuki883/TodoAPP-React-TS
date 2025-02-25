@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, useEffect} from 'react';
 import { TodoForm } from './components/TodoForm';
 import { TodoList } from './components/TodoList';
 import { TodoItemType, TodoStatus } from './types';
@@ -17,20 +17,22 @@ export const Todo: React.FC = () => {
   const [sortKey, setSortKey] = useState<'id' | 'dueDate'>('id');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
 
-  // //初回マウント時、localStorageから読み込む
-  // useEffect(() => {
-  //   const stored = localStorage.getItem('todos');
-  //   if (stored) {
-  //     setTodos(JSON.parse(stored));
-  //   }
-  // }, []);
-
-  // //todos が更新されるたびにlocalStorageへ保存
-  // useEffect(() => {
-  //   console.log('Updated todos state:', todos);
-  //   localStorage.setItem('todos', JSON.stringify(todos));
-  //   console.log('LocalStorage after set:', localStorage.getItem('todos'));
-  // }, [todos]);
+  useEffect(() => {
+    console.log("localStorage読み込み前:", localStorage.getItem('todos'));
+    const stored = localStorage.getItem('todos');
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      console.log("parse保存:", parsed);
+      setTodos(parsed);
+    }
+  }, []);
+  
+  useEffect(() => {
+    console.log("todos更新:", todos);
+    localStorage.setItem('todos', JSON.stringify(todos));
+    console.log("localStorageへ保存", localStorage.getItem('todos'));
+  }, [todos]);
+  
 
   //Todoを追加 (既存)
   const handleAddTodo = (title: string, detail: string, dueDate?: string) => {
